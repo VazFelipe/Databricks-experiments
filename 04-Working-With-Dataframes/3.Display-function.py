@@ -90,7 +90,7 @@ print(pagecountsEnAllDF)    # Python hack to see the data type
 
 # COMMAND ----------
 
-pagecountsEnAllDF.show()
+pagecountsEnAllDF.show(n=5, truncate=0)
 
 # COMMAND ----------
 

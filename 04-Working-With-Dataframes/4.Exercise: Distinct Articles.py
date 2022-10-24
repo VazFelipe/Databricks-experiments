@@ -46,16 +46,35 @@ path = source + "/wikipedia/pagecounts/staging_parquet_en_only_clean/"
 
 # COMMAND ----------
 
+(spark.read
+  .parquet(path)
+  .printSchema()
+)
+
+# COMMAND ----------
+
+from pyspark.sql.types import *
+
+parquetSchema = StructType(
+  [
+    StructField("article", StringType(), False)
+  ]
+)
+
+# COMMAND ----------
+
 # TODO
 # Replace <<FILL_IN>> with your code. 
 
 df = (spark                    # Our SparkSession & Entry Point
   .read                        # Our DataFrameReader
-  <<FILL_IN>>                  # Read in the parquet files
-  <<FILL_IN>>                  # Reduce the columns to just the one
-  <<FILL_IN>>                  # Produce a unique set of values
+  .schema(parquetSchema)       # Defining the data source as the schema
+  .parquet(path)               # Read in the parquet files
+  #.select("project")          # Reduce the columns to just the one
+  .distinct()                  # Produce a unique set of values
 )
-totalArticles = df.<<FILL_IN>> # Identify the total number of records remaining.
+      
+totalArticles = df.count()     # Identify the total number of records remaining.
 
 print("Distinct Articles: {0:,}".format(totalArticles))
 
@@ -68,5 +87,8 @@ print("Distinct Articles: {0:,}".format(totalArticles))
 # COMMAND ----------
 
 expected = 1783138
-assert totalArticles == expected, "Expected the total to be " + str(expected) + " but found " + str(totalArticles)
+assert totalArticles == expected, print"Expected the total to be " + str(expected) + " but found " + str(totalArticles)
+
+# COMMAND ----------
+
 
