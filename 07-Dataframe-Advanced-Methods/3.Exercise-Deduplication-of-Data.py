@@ -76,6 +76,10 @@ from pyspark.sql.functions import *
 
 txtFile = source + "/dataframes/people-with-dups.txt"
 
+partitions = 2
+
+spark.conf.set("spark.sql.shuffle.partitions", str(partitions))
+
 txtSchema = StructType([
   StructField("firstName", StringType(), False),
   StructField("middleName", StringType(), False),
@@ -92,10 +96,12 @@ txtDF = (spark
         .option("sep", ":")
         .schema(txtSchema)
         .csv(txtFile)
+        .repartition(partitions)
         .cache()
 )
 
-txtDF.count()
+print("Count of rows: " + str(txtDF.count()))
+print("Partitions: " + str(txtDF.rdd.getNumPartitions()) )
 # display(txtDF)
 
 # COMMAND ----------
