@@ -82,7 +82,8 @@
 
 # COMMAND ----------
 
-event_hub_connection_string = "Endpoint=sb://event-hub-free-account.servicebus.windows.net/;SharedAccessKeyName=Send-Listen-policy;SharedAccessKey=QpRJO5uzYmIk9uGmXmPhTsCeCwphNQZr9TIllhLKo4g=;EntityPath=my-event-hub" # Paste your Event Hubs connection string in the quotes to the left
+event_hub_connection_string = "Endpoint=sb://event-hub-free-account.servicebus.windows.net/;SharedAccessKeyName=Send-Listen-policy;SharedAccessKey=DpAa+U2jnUBmH+5x4VJDI74Ps7wZJiICoQS+lZ+/Cns=" 
+# Paste your Event Hubs connection string in the quotes to the left
 
 # COMMAND ----------
 
@@ -107,7 +108,7 @@ event_hub_connection_string = "Endpoint=sb://event-hub-free-account.servicebus.w
 
 # MAGIC %python
 # MAGIC 
-# MAGIC event_hub_name = "databricks-demo-eventhub"
+# MAGIC event_hub_name = "my-event-hub" # "databricks-demo-eventhub"
 # MAGIC connection_string = event_hub_connection_string + ";EntityPath=" + event_hub_name
 # MAGIC 
 # MAGIC print("Consumer Connection String: {}".format(connection_string))
